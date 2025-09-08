@@ -4,27 +4,22 @@ import sys
 # Initialize pygame
 pygame.init()
 
-# Screen settings
-screen_width, screen_height = 640, 480
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("my first game")
+# Window settings
+WINDOW_SIZE = (500, 500)
+BACKGROUND_COLOR = (58, 58, 58)
+pygame.display.set_caption("my first game screen")
 
-# Colors (RGB)
-WHITE = (255, 255, 255)
-BLUE = (0, 0, 255)  # rectangle color
+# Create the screen
+screen = pygame.display.set_mode(WINDOW_SIZE)
 
-# Rectangle settings
-rect_width, rect_height = 100, 60
-rect_x = (screen_width - rect_width) // 2
-rect_y = (screen_height - rect_height) // 2
-rect = pygame.Rect(rect_x, rect_y, rect_width, rect_height)
+# Load and resize image
+image = pygame.image.load("python.jpg")
+image = pygame.transform.scale(image, (300, 300))
 
-# Font settings
-font = pygame.font.SysFont(None, 48)
-text = font.render("Hello, Game!", True, (0, 0, 0))  # Black text
-text_rect = text.get_rect(center=(screen_width // 2, screen_height // 4))
+# Get image rect and center it
+image_rect = image.get_rect(center=(WINDOW_SIZE[0] // 2, WINDOW_SIZE[1] // 2))
 
-# Game loop
+# Main loop
 running = True
 while running:
     for event in pygame.event.get():
@@ -32,13 +27,10 @@ while running:
             running = False
 
     # Fill background
-    screen.fill(WHITE)
+    screen.fill(BACKGROUND_COLOR)
 
-    # Draw rectangle
-    pygame.draw.rect(screen, BLUE, rect)
-
-    # Draw text
-    screen.blit(text, text_rect)
+    # Draw image
+    screen.blit(image, image_rect)
 
     # Update display
     pygame.display.flip()
